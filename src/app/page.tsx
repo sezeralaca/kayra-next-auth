@@ -34,11 +34,10 @@ export default function LandingPage() {
 
         <main className="flex flex-col items-center text-center text-white max-w-3xl">
           <h1 className="text-5xl font-extrabold mb-6 drop-shadow-lg">
-            Authentic Turkish Carpets Management SaaS
+            Export Management System
           </h1>
           <p className="text-lg mb-10">
             Manage your unique carpet inventory, monitor sales, and grow your business with cutting-edge cloud technology.
-            Halı, kilim, travel.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -58,7 +57,7 @@ export default function LandingPage() {
         </main>
 
         <footer className="text-white text-sm mt-10">
-          © 2025 Sezer as a Service - All rights probably not reserved
+          © 2025 Sezer as a Service - Her türlü halı, kilim, travel.
         </footer>
       </div>
     </div>

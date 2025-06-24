@@ -37,7 +37,7 @@ export default function Dashboard() {
   return (
     <div className="relative min-h-screen w-screen overflow-hidden">
       <img
-        src="/bg.jpg"
+        src="/menu.jpg"
         alt="Background"
         className="absolute h-full w-full object-cover"
       />

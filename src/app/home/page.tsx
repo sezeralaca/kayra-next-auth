@@ -22,16 +22,19 @@ export default function HomePage() {
   }
 
   return (
+    
     <div className="relative min-h-screen w-screen overflow-hidden">
-      <img src="/login.jpg" alt="Background" className="absolute h-full w-full object-cover brightness-90" />
-<div className="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm" />
+      <img src="/menu.jpg" alt="Background" className="absolute h-full w-full object-cover brightness-90" />
+<div className="absolute inset-0  bg-opacity-20 backdrop-blur-sm" />
 <div className="relative z-10 p-10">
         <Header />
         <h1 className="text-4xl font-extrabold mb-10 text-white drop-shadow-lg text-center">
           Welcome, {session?.user?.email}
         </h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <p className="text-center text-white mb-10 text-lg italic">
+  The following data is static and for demonstration purposes only.
+</p>
+         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="p-8 bg-white/20 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30 text-white text-center">
             <h2 className="text-xl font-bold mb-2">Total Carpets</h2>
             <p className="text-3xl font-bold">124</p>

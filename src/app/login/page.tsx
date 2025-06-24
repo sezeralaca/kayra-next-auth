@@ -15,7 +15,6 @@ export default function LoginPage() {
     setError(null);
     try {
       await signIn(provider);
-      // signIn otomatik yönlendirme yapar
     } catch (err) {
         console.error("Login error:", err);
       setError("Login failed. Please try again.");

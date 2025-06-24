@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <div className="w-full flex justify-between items-center mb-10">
       <div className="text-3xl font-bold text-white drop-shadow-lg">
-        CarpetsRugsTravel
+        Kayra Export
       </div>
       <div>
         {session ? (
@@ -28,7 +28,7 @@ export default function Header() {
             onClick={() => signIn("auth0")}
             className="py-2 px-6 bg-white/30 hover:bg-white/50 text-white font-semibold rounded-lg shadow-md backdrop-blur-sm transition duration-300"
           >
-            Giriş Yap
+            Login
           </button>
         )}
       </div>
