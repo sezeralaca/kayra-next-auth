@@ -1,7 +1,8 @@
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthOptions } from "next-auth";
 import Auth0Provider from "next-auth/providers/auth0";
+import { Buffer } from "buffer";
 
-const handler = NextAuth({
+const authOptions: NextAuthOptions = {
   providers: [
     Auth0Provider({
       clientId: process.env.AUTH0_CLIENT_ID!,
@@ -13,21 +14,25 @@ const handler = NextAuth({
     strategy: "jwt",
   },
   callbacks: {
-    async jwt({ token, account }) {
-      if (account?.id_token) {
-        const idToken = account.id_token;
-        const decoded = JSON.parse(Buffer.from(idToken.split('.')[1], 'base64').toString());
-        const roles = decoded["https://example.com/roles"];
-        token.roles = roles;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      session.user.roles = token.roles || [];
-      return session;
-    },
+  async jwt({ token, account }) {
+    if (account?.id_token) {
+      const idToken = account.id_token;
+      const decoded = JSON.parse(Buffer.from(idToken.split('.')[1], "base64").toString());
+      const roles = decoded["https://sezeralaca.dev/roles"];
+      token.roles = roles;
+    }
+    return token;
   },
-  secret: process.env.NEXTAUTH_SECRET,
-});
+  async session({ session, token }) {
+    if (session.user) {
+      session.user.roles = token.roles || [];
+    }
+    return session;
+  },
+},
 
+  secret: process.env.NEXTAUTH_SECRET,
+};
+
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

@@ -1,9 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import Header from "@/app/components/header";
 
 export default function HomePage() {
   const { data: session, status } = useSession();
@@ -21,22 +22,33 @@ export default function HomePage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-500 to-blue-500">
-      <div className="backdrop-blur-lg bg-white/20 rounded-3xl p-10 w-[600px] text-center shadow-2xl border border-white/30">
-        <h1 className="text-4xl font-extrabold mb-4 text-white drop-shadow-lg">Home</h1>
-        <p className="text-white mb-4">Giriş Yaptın: {session?.user?.email}</p>
-        <Link
-          href="/dashboard"
-          className="block mb-4 py-3 px-6 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow-md transition duration-300"
-        >
-          Dashboard'a Git
-        </Link>
-        <button
-          onClick={() => signOut()}
-          className="py-3 px-6 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md transition duration-300"
-        >
-          Çıkış Yap
-        </button>
+    <div className="relative min-h-screen w-screen overflow-hidden">
+      <img src="/login.jpg" alt="Background" className="absolute h-full w-full object-cover brightness-90" />
+<div className="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm" />
+<div className="relative z-10 p-10">
+        <Header />
+        <h1 className="text-4xl font-extrabold mb-10 text-white drop-shadow-lg text-center">
+          Welcome, {session?.user?.email}
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="p-8 bg-white/20 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30 text-white text-center">
+            <h2 className="text-xl font-bold mb-2">Total Carpets</h2>
+            <p className="text-3xl font-bold">124</p>
+          </div>
+          <div className="p-8 bg-white/20 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30 text-white text-center">
+            <h2 className="text-xl font-bold mb-2">Active Sales</h2>
+            <p className="text-3xl font-bold">12</p>
+          </div>
+          <div className="p-8 bg-white/20 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30 text-white text-center">
+            <h2 className="text-xl font-bold mb-2">New Arrivals</h2>
+            <p className="text-3xl font-bold">5</p>
+          </div>
+          <div className="p-8 bg-white/20 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30 text-white text-center">
+            <h2 className="text-xl font-bold mb-2">Pending Orders</h2>
+            <p className="text-3xl font-bold">3</p>
+          </div>
+        </div>
       </div>
     </div>
   );

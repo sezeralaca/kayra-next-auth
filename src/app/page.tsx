@@ -1,8 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Header from "@/app/components/header";
 
 export default function LandingPage() {
   const { data: session, status } = useSession();
@@ -19,24 +21,45 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="relative flex items-center justify-center h-screen bg-gradient-to-br from-[#B2453C] via-[#E0A96D] to-[#FFE8C2] overflow-hidden">
-      <div className="absolute inset-0 opacity-10 bg-[url('/turkish-pattern.svg')] bg-repeat"></div>
+    <div className="relative h-screen w-screen overflow-hidden">
+      <img
+        src="/login.png"
+        alt="Background"
+        className="absolute h-full w-full object-cover"
+      />
+      <div className=" absolute inset-0 backdrop-blur-xs" />
 
-      <div className="backdrop-blur-lg bg-white/20 rounded-3xl p-14 w-[500px] text-center shadow-2xl border border-white/30 z-10">
-        <h1 className="text-5xl font-extrabold mb-8 text-white drop-shadow-lg">
-          CaaS - Carpet as a Service
-        </h1>
-        <p className="text-white mb-8 text-lg">
-          Manage your authentic Turkish carpets with modern technology.
-          Carpets, Rugs, Travel  
-        </p>
-        
-        <button
-          onClick={() => signIn("auth0")}
-          className="w-full py-3 px-6 bg-white/30 hover:bg-white/50 text-white font-semibold rounded-lg shadow-md transition duration-300 backdrop-blur-sm"
-        >
-          Auth0 ile Giriş Yap
-        </button>
+      <div className="relative z-10 flex flex-col items-center justify-between h-full p-10">
+        <Header />
+
+        <main className="flex flex-col items-center text-center text-white max-w-3xl">
+          <h1 className="text-5xl font-extrabold mb-6 drop-shadow-lg">
+            Authentic Turkish Carpets Management SaaS
+          </h1>
+          <p className="text-lg mb-10">
+            Manage your unique carpet inventory, monitor sales, and grow your business with cutting-edge cloud technology.
+            Halı, kilim, travel.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white/20 backdrop-blur-sm p-6 rounded-xl border border-white/30 shadow-lg">
+              <h3 className="text-2xl font-bold mb-2">Inventory</h3>
+              <p>Track and manage your authentic carpet stock in real-time.</p>
+            </div>
+            <div className="bg-white/20 backdrop-blur-sm p-6 rounded-xl border border-white/30 shadow-lg">
+              <h3 className="text-2xl font-bold mb-2">Sales Analytics</h3>
+              <p>Monitor sales trends and optimize your business performance.</p>
+            </div>
+            <div className="bg-white/20 backdrop-blur-sm p-6 rounded-xl border border-white/30 shadow-lg">
+              <h3 className="text-2xl font-bold mb-2">Multi-Store</h3>
+              <p>Handle multiple stores and warehouses with ease from one place.</p>
+            </div>
+          </div>
+        </main>
+
+        <footer className="text-white text-sm mt-10">
+          © 2025 Sezer as a Service - All rights probably not reserved
+        </footer>
       </div>
     </div>
   );

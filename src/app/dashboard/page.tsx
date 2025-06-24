@@ -1,16 +1,12 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Header from "@/app/components/header";
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from "recharts";
 
 const data = [
@@ -28,9 +24,10 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (status === "loading") return;
-    if (!session?.user.roles?.includes("admin")) {
-      router.push("/home");
-    }
+    if (!session?.user || !session.user.roles?.includes("admin")) {
+  router.push("/home");
+}
+
   }, [session, status, router]);
 
   if (status === "loading") {
@@ -38,13 +35,22 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-[#7B3F00] to-[#FFD700]">
-      <div className="backdrop-blur-lg bg-white/20 rounded-3xl p-10 w-[700px] text-center shadow-2xl border border-white/30">
-        <h1 className="text-4xl font-extrabold mb-6 text-white drop-shadow-lg">Admin Dashboard</h1>
-        <p className="text-white mb-6">Hoşgeldin {session?.user?.email}</p>
-        <div className="bg-white/10 p-6 rounded-xl shadow-inner mb-6">
-          <h2 className="text-xl text-white mb-4">Satış İstatistikleri</h2>
-          <div className="w-full h-64">
+    <div className="relative min-h-screen w-screen overflow-hidden">
+      <img
+        src="/bg.jpg"
+        alt="Background"
+        className="absolute h-full w-full object-cover"
+      />
+      <div className="inset-0  backdrop-blur-xl" />
+      <div className="relative z-10 p-10">
+        <Header />
+        <h1 className="text-4xl font-extrabold mb-10 text-white drop-shadow-lg text-center">
+          Admin Dashboard
+        </h1>
+
+        <div className="bg-white/20 backdrop-blur-lg p-8 rounded-2xl shadow-xl border border-white/30 text-white">
+          <h2 className="text-2xl font-bold mb-6">Sales Performance</h2>
+          <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -56,12 +62,6 @@ export default function Dashboard() {
             </ResponsiveContainer>
           </div>
         </div>
-        <button
-          onClick={() => signOut()}
-          className="py-3 px-6 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md transition duration-300"
-        >
-          Çıkış Yap
-        </button>
       </div>
     </div>
   );
